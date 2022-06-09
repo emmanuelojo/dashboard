@@ -1,106 +1,80 @@
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
+import Sidebar from "../components/Sidebar.vue";
+
+onMounted(async () => {});
+
+const visibleLeft = ref(false);
+
+const showSidebar = ref(true);
+
+const toggleSidebar = () => {
+  showSidebar.value = !showSidebar.value;
+  console.log("I was toggled");
+};
+
+const closeSideBar = () => {
+  visibleLeft.value = false;
+};
+</script>
+
 <template>
-  <div class="main-layout border-6 border-red-500">
-    <div class="content">
-      <router-view />
+  <!-- <div class="main-layout grid grid-cols-2auto"> -->
+  <div class="main-layout flex">
+    <transition v-if="showSidebar" name="sidebar" mode="out-in" appear>
+      <div :class="showSidebar ? 'block' : 'hidden'">
+        <Sidebar />
+      </div>
+    </transition>
+
+    <div class="h-screen overflow-y-auto">
+      <router-view
+        v-slot="{ Component, route }"
+        @toggle-side-bar="toggleSidebar"
+      >
+        <Navbar />
+        <transition name="fade" appear mode="out-in">
+          <div :key="route.name">
+            <component :is="Component" />
+          </div>
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-// import Footer from "../components/Footer.vue";
-// import Navbar from "../components/Navbar.vue";
-// import Home from "../views/Home.vue";
-
-export default defineComponent({
-  name: "MainLayout",
-
-  components: {
-    // Navbar,
-    // Home,
-    // Footer,
-  },
-
-  setup() {
-    onMounted(async () => {});
-
-    const visibleLeft = ref(false);
-
-    const closeSideBar = () => {
-      visibleLeft.value = false;
-    };
-
-    return { visibleLeft, closeSideBar };
-  },
-});
-</script>
-
 <style scoped>
-/* .main-layout {
-  margin: 0;
-  padding: 0;
-  position: relative;
-
-  .hamburger-menu {
-    display: none;
-  }
-
-  .body {
-    display: flex;
-
-    .sidebar {
-      width: 18vw;
-      height: 100vh;
-      background: #0d142f;
-      position: fixed;
-
-      .brand {
-        .admin-init {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 30px 0;
-
-          span {
-            background: #faa100;
-            color: #f7f7f7;
-            font-weight: 500;
-            font-size: 22px;
-            border-radius: 50%;
-            padding: 10px 7px;
-          }
-        }
-      }
-    }
-
-    .content {
-      width: 88vw;
-      height: 100%;
-      overflow-y: auto;
-      margin-left: 18.5%;
-    }
-  }
+.sidebar-enter-from,
+.sidebar-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
 }
-@media screen and (max-width: 480px) {
-  .main-layout {
-    background: #e5e5e5;
 
-    .body {
-      width: 100vw;
-      display: flex;
-      flex-direction: column;
+.sidebar-enter-to,
+.sidebar-leave-from {
+  opacity: 1;
+  transform: translate(0);
+}
 
-      .sidebar {
-        display: none;
-        width: 0vw;
-      }
+.sidebar-enter-active,
+.sidebar-leave-active {
+  transition: all 1s ease;
+}
+.fade-enter-from {
+  opacity: 0;
+}
 
-      .content {
-        width: 100vw;
-        margin-left: 0;
-        background: #e5e5e5;
-      }
-    }
-  }
-} */
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
 </style>
