@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import Navbar from "../components/Navbar.vue";
 import Sidebar from "../components/Sidebar.vue";
+import navbarStore from "../store/navbarStore";
 
-onMounted(async () => {});
+onMounted(async () => {
+  navbarStore.actions.getSidebarStatus();
+});
 
 const visibleLeft = ref(false);
 
-const showSidebar = ref(true);
+const showSidebar = ref(navbarStore.getters.sidebarStatus);
 
-const toggleSidebar = () => {
-  showSidebar.value = !showSidebar.value;
-  console.log("I was toggled");
-};
+// const toggleSidebar = () => {
+//   showSidebar.value = !showSidebar.value;
+//   console.log("I was toggled");
+// };
 
 const closeSideBar = () => {
   visibleLeft.value = false;
@@ -19,20 +23,21 @@ const closeSideBar = () => {
 </script>
 
 <template>
-  <!-- <div class="main-layout grid grid-cols-2auto"> -->
-  <div class="main-layout flex">
-    <transition v-if="showSidebar" name="sidebar" mode="out-in" appear>
-      <div :class="showSidebar ? 'block' : 'hidden'">
-        <Sidebar />
-      </div>
-    </transition>
+  <div class="grid grid-cols-auto-1fr bg-n-bg">
+    <!-- <Sidebar :showSidebar="true" /> -->
+    <div :class="`${showSidebar ? 'block' : 'hidden'} md:block`">
+      <Sidebar :showSidebar="true" />
+    </div>
 
     <div class="h-screen overflow-y-auto">
-      <router-view
+      <!-- <router-view
         v-slot="{ Component, route }"
         @toggle-side-bar="toggleSidebar"
-      >
-        <Navbar />
+      > -->
+      <router-view v-slot="{ Component, route }">
+        <div class="block md:hidden fixed w-full">
+          <Navbar />
+        </div>
         <transition name="fade" appear mode="out-in">
           <div :key="route.name">
             <component :is="Component" />

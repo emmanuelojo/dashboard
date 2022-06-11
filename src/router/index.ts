@@ -40,7 +40,63 @@ const routes: Array<RouteRecordRaw> = [
         name: "Home",
         component: Home,
         meta: {
-          title: "Home",
+          title: "Dashboard",
+        },
+      },
+      {
+        path: "/customers",
+        name: "Customers",
+        component: () => import("../views/Customers.vue"),
+        meta: {
+          title: "Customers",
+        },
+      },
+      {
+        path: "/orders",
+        name: "Orders",
+        component: () => import("../views/Orders.vue"),
+        meta: {
+          title: "Orders",
+        },
+      },
+      {
+        path: "/analytics",
+        name: "Analytics",
+        component: () => import("../views/Analytics.vue"),
+        meta: {
+          title: "Analytics",
+        },
+      },
+      {
+        path: "/messages",
+        name: "Messages",
+        component: () => import("../views/Messages.vue"),
+        meta: {
+          title: "Messages",
+        },
+      },
+      {
+        path: "/products",
+        name: "Products",
+        component: () => import("../views/Products.vue"),
+        meta: {
+          title: "Products",
+        },
+      },
+      {
+        path: "/reports",
+        name: "Reports",
+        component: () => import("../views/Reports.vue"),
+        meta: {
+          title: "Reports",
+        },
+      },
+      {
+        path: "/settings",
+        name: "Settings",
+        component: () => import("../views/Settings.vue"),
+        meta: {
+          title: "Settings",
         },
       },
     ],

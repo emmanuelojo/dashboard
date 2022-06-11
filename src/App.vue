@@ -5,10 +5,10 @@
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
 
 #app {
-  font-family: "Montserrat";
+  font-family: "Nunito";
 }
 body {
   margin: 0;
