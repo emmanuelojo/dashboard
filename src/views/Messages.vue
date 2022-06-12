@@ -20,7 +20,7 @@ import Pagination from "../components/Pagination.vue";
               class="w-10 h-10 rounded-full object-cover"
             />
 
-            <div class="flex flex-col sm:flex-row items-center sm:gap-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4">
               <p class="text-n-black font-semibold">username{{ idx + 1 }}</p>
               <p class="text-xs">1 month ago</p>
             </div>
