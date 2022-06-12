@@ -4,7 +4,7 @@
       <div class="brand w-5 h-5 flex justify-center mx-auto mt-5">
         <img
           class="logo w-full h-full"
-          src="../assets/logo.png"
+          src="../assets/logo.svg"
           alt="logo"
           id="logo"
         />

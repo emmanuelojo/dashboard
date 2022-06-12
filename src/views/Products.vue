@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import Pagination from "../components/Pagination.vue";
 import { formatCurrency } from "../utils/helpers";
 </script>
 
 <template>
-  <div class="my-10 grid gap-4 mx-2 lg:mx-10">
+  <div
+    class="mt-20 md:mt-10 mb-10 grid gap-4 px-4 lg:px-10 w-screen md:w-full lg:w-auto"
+  >
     <p class="text-2xl font-bold">Products(10)</p>
 
     <div class="bg-white rounded-md shadow-md p-4 overflow-auto">
@@ -31,7 +34,7 @@ import { formatCurrency } from "../utils/helpers";
                   class="w-10 h-10 rounded-md object-cover"
                 />
               </span>
-              <p>Product {{ idx + 1 }}</p>
+              <p class="w-fit">Product{{ idx + 1 }}</p>
             </td>
             <td class="px-6 py-4 text-sm">
               {{ formatCurrency("en-us", 450, "USD") }}
@@ -41,6 +44,10 @@ import { formatCurrency } from "../utils/helpers";
           </tr>
         </tbody>
       </table>
+
+      <div class="mt-10 flex justify-center items-center">
+        <Pagination />
+      </div>
     </div>
   </div>
 </template>

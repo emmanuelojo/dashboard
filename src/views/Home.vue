@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import FacebookLogo from "../assets/fb.svg";
+import InstagramLogo from "../assets/ig.svg";
+import LinkedInLogo from "../assets/linkedin.svg";
+import YouTubeLogo from "../assets/yt.svg";
+import router from "../router";
 import { formatCurrency } from "../utils/helpers";
 
 const today = new Date().toISOString().split("T")[0];
@@ -72,41 +77,51 @@ const orders = [
 const topChannels = [
   {
     name: "Instagram",
-    logo: "",
+    logo: InstagramLogo,
     visits: 124,
     conversionRate: 5,
-    visitRatio: "1",
+    visitRatio: "1/5",
   },
   {
-    name: "Twitter",
-    logo: "",
+    name: "LinkedIn",
+    logo: LinkedInLogo,
     visits: 120,
     conversionRate: 12,
-    visitRatio: "2",
+    visitRatio: "2/5",
   },
   {
     name: "YouTube",
-    logo: "",
+    logo: YouTubeLogo,
     visits: 80,
     conversionRate: 7,
-    visitRatio: "5",
+    visitRatio: "5/5",
   },
   {
     name: "Facebook",
-    logo: "",
+    logo: FacebookLogo,
     visits: 64,
     conversionRate: 3,
-    visitRatio: "2",
+    visitRatio: "2/5",
   },
 ];
+
+const goToSettings = () => {
+  router.push("/settings");
+};
 </script>
 
 <template>
-  <div class="text-n-black">
-    <div>
-      <div class="h-16 w-full px-4 bg-white flex justify-between items-center">
+  <div class="text-n-black w-screen md:w-full">
+    <div class="">
+      <div
+        class="invisible md:visible h-16 w-full px-4 bg-white flex justify-between items-center"
+      >
         <p class="text-2xl font-bold">Dashboard</p>
-        <div class="flex justify-between items-center gap-2">
+
+        <div
+          @click="goToSettings"
+          class="flex justify-between items-center gap-2 cursor-pointer"
+        >
           <div>
             <p class="text-sm font-bold">Andy Doe</p>
             <p class="text-[11px] font-semibold">UI/UX Designer</p>
@@ -125,15 +140,17 @@ const topChannels = [
       </div>
     </div>
 
-    <div class="p-2 sm:px-4 sm:pb-10 lg:px-10 grid lg:grid-cols-auto-1fr gap-8">
+    <div
+      class="p-2 sm:px-4 sm:pb-10 lg:px-10 grid sm: lg:grid-cols-auto-1fr gap-8"
+    >
       <div class="">
         <div
-          class="grid sm:grid-cols-2 md:flex lg:justify-between gap-8 md:gap-2 lg:gap-0 my-5"
+          class="grid sm:grid-cols-2 md:grid-cols-md-fr lg:flex lg:justify-between gap-8 md:gap-10 lg:gap-0 my-5"
         >
           <div
             v-for="(item, idx) in summaryList"
             :key="idx"
-            class="bg-white p-4 rounded-md shadow-md w-[95%] sm:w-fit md:w-[212px] lg:w-60 flex justify-between items-center gap-4 mx-auto lg:mx-0"
+            class="bg-white p-4 rounded-md shadow-md w-[95%] sm:w-fit md:w-[250px] lg:w-64 flex justify-between items-center gap-4 mx-auto lg:mx-0"
           >
             <div class="grid gap-4 sm:w-40 md:w-24">
               <div
@@ -214,18 +231,16 @@ const topChannels = [
           <div class="flex justify-between p-4 border-b">
             <p class="font-bold">Top Channels</p>
 
-            <div class="flex items-center text-n-blue">
+            <div class="flex items-center text-n-blue cursor-pointer">
               <p class="font-bold">See Details</p>
               <span class="ml-2"> <i class="fa fa-chevron-right"></i> </span>
             </div>
           </div>
 
           <div class="p-4">
-            <div
-              class="flex items-center justify-between md:justify-start md:gap-48"
-            >
-              <p>Source</p>
-              <p class="mr-10 md:mr-0">Visit</p>
+            <div class="flex items-center justify-between">
+              <p class="">Source</p>
+              <p class="mr-[30%] sm:mr-[55%] md:mr-[50%] lg:mr-[65%]">Visit</p>
             </div>
 
             <div class="mt-4 grid gap-3">
@@ -236,7 +251,7 @@ const topChannels = [
               >
                 <div class="w-50 flex items-center gap-4">
                   <img
-                    src="../assets/logo.png"
+                    :src="channel.logo"
                     :alt="channel.name + ' Logo'"
                     class="w-10 h-10"
                   />
@@ -255,9 +270,16 @@ const topChannels = [
                   class="hidden sm:block sm:w-[230px] md:w-[150px] lg:w-[400px]"
                 >
                   <div
-                    :class="`h-10 ${
-                      'w-' + channel.visitRatio + '/5'
-                    } bg-blue-300 rounded-md`"
+                    class="h-10 bg-blue-300 rounded-md"
+                    :class="
+                      idx === 0
+                        ? 'w-4/5'
+                        : idx === 1
+                        ? 'w-full'
+                        : idx === 2
+                        ? 'w-1/5'
+                        : 'w-2/5'
+                    "
                   ></div>
                 </div>
               </div>
@@ -323,13 +345,6 @@ const topChannels = [
                 <p class="text-sm font-bold">3849</p>
               </div>
             </div>
-          </div>
-
-          <div
-            class="bg-n-bold-blue my-4 p-4 rounded-md shadow-md cursor-pointer flex justify-center items-center gap-[6px]"
-          >
-            <i class="fa fa-plus"></i>
-            <p class="text-sm font-bold">Add Product</p>
           </div>
         </div>
       </div>

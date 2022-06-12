@@ -11,38 +11,54 @@ const route = router.currentRoute.value.name;
 
 const isToggled = ref(false);
 
-const activeLink = ref("HOME");
-
-if (route === "Crew") {
-  activeLink.value = "CREW";
-} else if (route === "Destination") {
-  activeLink.value = "DESTINATION";
-} else if (route === "Technology") {
-  activeLink.value = "TECHNOLOGY";
-} else {
-  activeLink.value = "HOME";
-}
-
-const navbarItems = [
+const sideBarLinks = [
   {
-    name: "HOME",
-    number: "00",
-    link: "/",
+    label: "Dashboard",
+    name: "Dashboard",
+    path: "/",
+    icon: "home",
   },
   {
-    name: "DESTINATION",
-    number: "01",
-    link: "/destination",
+    label: "Customers",
+    name: "Customers",
+    path: "/customers",
+    icon: "users",
   },
   {
-    name: "CREW",
-    number: "02",
-    link: "/crew",
+    label: "Orders",
+    name: "Orders",
+    path: "/orders",
+    icon: "credit-card",
   },
   {
-    name: "TECHNOLOGY",
-    number: "03",
-    link: "/tech",
+    label: "Analytics",
+    name: "Analytics",
+    path: "/analytics",
+    icon: "line-chart",
+  },
+  {
+    label: "Inbox",
+    name: "Inbox",
+    path: "/messages",
+    icon: "envelope",
+  },
+  {
+    label: "Products",
+    name: "Products",
+    path: "/products",
+    icon: "shopping-bag",
+  },
+  {
+    label: "Reports",
+    name: "Reports",
+    path: "/reports",
+    icon: "exclamation-circle",
+  },
+  {
+    label: "Settings",
+    name: "Settings",
+    path: "/settings",
+    icon: "cog",
   },
 ];
 
@@ -54,9 +70,12 @@ const toggleSidebar = () => {
 </script>
 
 <template>
-  <div class="navbar h-16 bg-white w-full flex justify-between p-2 lg:py-4">
+  <div
+    class="navbar h-16 bg-white w-full flex justify-between p-2 lg:py-4 fixed"
+    style="z-index: 1000"
+  >
     <div class="logo">
-      <img src="../assets/logo.png" alt="Logo" class="w-10 h-10" />
+      <img src="../assets/logo.svg" alt="Logo" class="w-10 h-10" />
     </div>
 
     <div class="flex justify-between items-center">
@@ -64,39 +83,57 @@ const toggleSidebar = () => {
         <hr class="bg-gray-500 max-w-[500px] ml-[500px]" />
       </div>
 
-      <!-- <nav
-        class="lg:pl-7 bg-[rgba(0,0,0,0.2)]"
-        :class="
-          isToggled
-            ? 'flex justify-between items-center fixed right-0 top-0 w-full bg-[rgba(0,0,0,0.7)]'
-            : 'hidden md:flex justify-between items-center pt-5'
-        "
+      <nav
+        class="w-50 h-screen overflow-y-auto bg-n-darker-blue grid-rows-2auto gap-8 fixed top-0 left-0 shadow"
+        :class="isToggled ? 'grid ' : 'hidden'"
+        style="z-index: 1000"
       >
-        <ul
-          class="grid pt-16 md:pt-0 gap-5 md:flex md:items-center md:mr-5 lg:mr-10"
-          :class="isToggled ? 'mx-auto' : ''"
-        >
-          <li
-            v-for="(ele, idx) in navbarItems"
-            :key="idx"
-            class="text-left lg:mx-7"
-            :class="idx === navbarItems.length - 1 ? 'mb-8 md:mb-0' : ''"
-            @click="activeLink = ele.name"
-          >
-            <router-link :to="ele.link" class="">
-              <p
-                class="w-fit flex text-white font-normal pb-4"
-                :class="[
-                  activeLink === ele.name ? ' border-b-2 border-white ' : '',
-                ]"
+        <div class="px-3 pt-16">
+          <ul class="grid gap-4">
+            <li
+              v-for="(link, idx) in sideBarLinks"
+              :key="idx"
+              class="w-full block"
+            >
+              <router-link
+                @click="isToggled = !isToggled"
+                exact-active-class="active"
+                :to="link.path"
+                class="flex items-center gap-5 transition ease-linear hover:rounded-tr-md hover:rounded-br-md hover:font-semibold text-n-gray relative"
               >
-                <span class="font-semibold mr-2"> {{ ele.number }}</span>
-                {{ ele.name }}
-              </p>
-            </router-link>
+                <div></div>
+                <div class="py-[10px] flex items-center gap-2">
+                  <i :class="`fa fa-${link.icon}`"></i>
+                  <p class="text-sm capitalize">
+                    {{ link.name }}
+                  </p>
+                  <p
+                    v-if="link.name === 'Inbox'"
+                    class="absolute right-2 px-1 py-[2px] flex justify-center items-center bg-red-400 text-white text-[10px] rounded-[4px]"
+                  >
+                    15
+                  </p>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
+
+        <div class="px-3">
+          <li>
+            <a
+              class="flex items-center gap-5 transition ease-linear hover:rounded-tr-md text-n-gray hover:rounded-br-md hover:font-semibold cursor-pointer"
+            >
+              <div class=""></div>
+              <div class="py-[10px] flex items-center gap-2">
+                <i class="fa fa-sign-out"></i>
+                <p class="text-sm capitalize">Logout</p>
+              </div>
+            </a>
           </li>
-        </ul>
-      </nav> -->
+        </div>
+      </nav>
+
       <div
         class="p-2 z-20 md:hidden absolute top-0 right-0"
         @click="toggleSidebar"
@@ -107,10 +144,6 @@ const toggleSidebar = () => {
         </button>
       </div>
     </div>
-
-    <!-- <div v-if="isToggled">
-      <Sidebar />
-    </div> -->
   </div>
 </template>
 
@@ -126,15 +159,11 @@ const toggleSidebar = () => {
   display: block;
   width: 30px;
   height: 3px;
-  background-color: #000000;
+  background-color: #081a51;
   margin-block: 7px;
   border-radius: 4px;
   transition: transform 0.5s, opacity 0.25s;
 }
-
-/* .hamburger.active .line {
-  background-color: #fff;
-} */
 
 .hamburger.active .line:nth-child(1) {
   transform: translateY(13px) rotate(45deg);

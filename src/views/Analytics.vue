@@ -116,7 +116,7 @@ const shuffleData = () => {
 </script>
 
 <template>
-  <div class="p-4 md:p-10 w-full">
+  <div class="px-4 mt-20 lg:px-10 md:mt-10 w-screen md:w-full">
     <p class="mb-5 text-2xl font-bold">Analytics</p>
     <div></div>
     <div></div>
@@ -132,8 +132,8 @@ const shuffleData = () => {
         />
       </div>
 
-      <div class="mt-16 lg:mb-32 flex justify-around items-center">
-        <div class="md:h-[305px]">
+      <div class="mt-16 lg:mb-32 grid sm:flex justify-around items-center">
+        <div class="lg:h-[305px]">
           <p class="font-semibold mb-4">Gender</p>
 
           <DoughnutChart

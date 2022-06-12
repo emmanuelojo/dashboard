@@ -30,6 +30,7 @@ module.exports = {
         "4auto": "repeat(4, auto)",
         "5auto": "repeat(5, auto)",
         "2fr-1fr": "2fr 1fr",
+        "md-fr": "repeat(auto-fill, minmax(200px,1fr))",
       },
       gridTemplateRows: {
         "2auto": "auto 1fr auto",

@@ -12,11 +12,6 @@ const visibleLeft = ref(false);
 
 const showSidebar = ref(navbarStore.getters.sidebarStatus);
 
-// const toggleSidebar = () => {
-//   showSidebar.value = !showSidebar.value;
-//   console.log("I was toggled");
-// };
-
 const closeSideBar = () => {
   visibleLeft.value = false;
 };
@@ -24,16 +19,11 @@ const closeSideBar = () => {
 
 <template>
   <div class="grid grid-cols-auto-1fr bg-n-bg">
-    <!-- <Sidebar :showSidebar="true" /> -->
     <div :class="`${showSidebar ? 'block' : 'hidden'} md:block`">
       <Sidebar :showSidebar="true" />
     </div>
 
     <div class="h-screen overflow-y-auto">
-      <!-- <router-view
-        v-slot="{ Component, route }"
-        @toggle-side-bar="toggleSidebar"
-      > -->
       <router-view v-slot="{ Component, route }">
         <div class="block md:hidden fixed w-full">
           <Navbar />

@@ -84,16 +84,8 @@ const props = defineProps({
           : 'flex px-2'
       "
     >
-      <div
-        v-if="reduceSidebarWidth"
-        class="bg-purple-800 rounded-md w-fit px-[6px] py-1 flex justify-center items-center"
-      >
-        <p class="text-white font-bold text-[11px]">Dash</p>
-      </div>
-
       <img
-        v-else
-        src="../assets/logo.png"
+        src="../assets/logo.svg"
         alt="Logo Image"
         class="w-10 h-10 object-cover"
       />
@@ -138,19 +130,19 @@ const props = defineProps({
       </ul>
     </div>
 
-    <!-- <div>
+    <div :class="reduceSidebarWidth ? 'px-0' : 'px-3'">
       <li>
         <a
-          class="flex items-center gap-5 transition ease-linear hover:rounded-tr-md hover:rounded-br-md hover:font-semibold cursor-pointer"
+          class="flex items-center gap-5 transition ease-linear hover:rounded-tr-md text-n-gray hover:rounded-br-md hover:font-semibold cursor-pointer"
         >
-          <div></div>
+          <div class=""></div>
           <div class="py-[10px] flex items-center gap-2">
-            <i class="fa fa-sign-out-alt"></i>
-            <p class="text-sm capitalize">Logout</p>
+            <i class="fa fa-sign-out"></i>
+            <p v-if="!reduceSidebarWidth" class="text-sm capitalize">Logout</p>
           </div>
         </a>
       </li>
-    </div> -->
+    </div>
   </div>
 </template>
 

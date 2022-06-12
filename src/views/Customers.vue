@@ -1,22 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-
-onMounted(async () => {
-  await getCustomers();
-});
-
-const customers = ref<any>([]);
-
-const getCustomers = async () => {
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => res.json())
-    .then((data) => customers.value.push(...data));
-};
+import Pagination from "../components/Pagination.vue";
 </script>
 
 <template>
-  <div class="p-4 md:p-10">
-    <p class="text-2xl font-bold">Customers({{ customers.length }})</p>
+  <div class="mt-20 md:mt-10 mb-10 grid gap-4 mx-4 lg:mx-10">
+    <p class="text-2xl font-bold">Customers(10)</p>
 
     <div class="bg-white rounded-md shadow-md mt-5 p-4 overflow-auto w-full">
       <table class="w-full">
@@ -45,16 +33,20 @@ const getCustomers = async () => {
                   class="w-10 h-10 rounded-full object-cover"
                 />
               </div>
-              <p>Customer {{ idx + 1 }}</p>
+              <p>Customer{{ idx + 1 }}</p>
             </td>
             <td class="px-6 py-4">customer{{ idx + 1 }}@mail.com</td>
-            <td class="px-6 py-4">{{ idx + 1 }}, Avenue</td>
-            <td class="px-6 py-4">+555-333-888</td>
-            <td class="px-6 py-4">Company {{ idx + 1 }}</td>
+            <td class="px-6 py-4">{{ idx + 1 }},Avenue</td>
+            <td class="px-6 py-4">+555333888</td>
+            <td class="px-6 py-4">Company{{ idx + 1 }}</td>
             <td class="px-6 py-4">www.customer{{ idx + 1 }}.com</td>
           </tr>
         </tbody>
       </table>
+
+      <div class="mt-10 flex justify-center items-center">
+        <Pagination />
+      </div>
     </div>
   </div>
 </template>

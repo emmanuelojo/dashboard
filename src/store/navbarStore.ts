@@ -11,13 +11,11 @@ const state = reactive<State>({
 const mutations = {
   setSidebar(payload: boolean) {
     state.showSidebar = !state.showSidebar;
-    console.log(state.showSidebar, " status changed");
   },
 };
 
 const actions = {
   getSidebarStatus() {
-    console.log(state.showSidebar, " status");
     return state.showSidebar;
   },
 };
