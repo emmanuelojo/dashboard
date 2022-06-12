@@ -184,4 +184,7 @@ a {
   background: #fff;
   height: 3px;
 }
+li {
+  list-style-type: none;
+}
 </style>
