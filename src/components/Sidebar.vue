@@ -147,6 +147,9 @@ const props = defineProps({
 </template>
 
 <style>
+li {
+  list-style-type: none;
+}
 li a.active,
 a:hover {
   border-top-right-radius: 6px;
