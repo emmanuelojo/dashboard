@@ -3,6 +3,7 @@ import FacebookLogo from "../assets/fb.svg";
 import InstagramLogo from "../assets/ig.svg";
 import LinkedInLogo from "../assets/linkedin.svg";
 import YouTubeLogo from "../assets/yt.svg";
+import RadialProgress from "../components/RadialProgress.vue";
 import router from "../router";
 import { formatCurrency } from "../utils/helpers";
 
@@ -135,7 +136,7 @@ const goToSettings = () => {
           </div>
         </div>
       </div>
-      <div class="mt-4 px-4 lg:px-10">
+      <div class="my-4 px-4 lg:px-10">
         <input type="date" v-model="today" class="border" />
       </div>
     </div>
@@ -145,7 +146,7 @@ const goToSettings = () => {
     >
       <div class="">
         <div
-          class="grid sm:grid-cols-2 md:grid-cols-md-fr lg:flex lg:justify-between gap-8 md:gap-10 lg:gap-0 my-5"
+          class="grid sm:grid-cols-2 md:grid-cols-md-fr lg:flex lg:justify-between gap-8 md:gap-10 lg:gap-0 mb-5"
         >
           <div
             v-for="(item, idx) in summaryList"
@@ -171,11 +172,15 @@ const goToSettings = () => {
               >
             </div>
             <div class="">
-              <div
-                class="flex justify-center items-center w-20 h-20 rounded-full bg-n-bold-blue"
-              >
-                <div class="w-16 h-16 rounded-full bg-white"></div>
-              </div>
+              <RadialProgress
+                :percent="item.percent"
+                :width="72"
+                stroke-color="#017EFA"
+                :stroke-width="6"
+                text-color="#017EFA"
+                innerStrokeColor="#E9F6F7"
+                :font-size="11"
+              />
             </div>
           </div>
         </div>
