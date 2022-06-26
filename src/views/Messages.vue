@@ -1,9 +1,19 @@
 <script setup lang="ts">
+import { ref, Ref, onMounted} from 'vue'
 import Pagination from "../components/Pagination.vue";
+
+const listContainer = ref() as Ref<HTMLDivElement>
+
+onMounted(() => {
+  listContainer.value.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+})
 </script>
 
 <template>
-  <div class="mt-20 md:mt-10 mb-10 grid gap-4 mx-4 lg:mx-10">
+  <div class="mt-20 md:mt-10 mb-10 grid gap-4 mx-4 lg:mx-10" ref="listContainer">
     <p class="text-2xl font-bold">Messages(150)</p>
 
     <div class="mt-4 grid gap-6">

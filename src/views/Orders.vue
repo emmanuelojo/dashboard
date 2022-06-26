@@ -1,6 +1,16 @@
 <script setup lang="ts">
+import { ref, Ref, onMounted} from 'vue'
 import Pagination from "../components/Pagination.vue";
 import { formatCurrency } from "../utils/helpers";
+
+const listContainer = ref() as Ref<HTMLDivElement>
+
+onMounted(() => {
+  listContainer.value.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+})
 
 const orders = [
   {
@@ -98,7 +108,7 @@ const orders = [
 
 <template>
   <div
-    class="mt-20 md:mt-10 mb-10 grid gap-4 px-4 lg:px-10 w-screen md:w-full lg:w-auto"
+    class="mt-20 md:mt-10 mb-10 grid gap-4 px-4 lg:px-10 w-screen md:w-full lg:w-auto" ref="listContainer"
   >
     <p class="text-2xl font-bold">Orders({{ orders.length }})</p>
 
