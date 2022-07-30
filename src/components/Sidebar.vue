@@ -75,6 +75,7 @@ const props = defineProps({
   <div
     class="hidden py-5 h-screen overflow-y-auto md:grid grid-rows-2auto gap-8 bg-n-darker-blue relative"
     :class="reduceSidebarWidth ? 'w-16' : ' w-[200px]'"
+    style="z-index: 1000"
   >
     <div
       class="justify-between items-center"

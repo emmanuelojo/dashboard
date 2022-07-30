@@ -212,19 +212,21 @@ const goToSettings = () => {
                   <td class="px-6 py-2">
                     {{ item.hasPaid }}
                   </td>
-                  <td
-                    class="px-6 py-2"
-                    :style="`color:  ${
-                      item.status === 'In Progress'
-                        ? 'yellow'
-                        : item.status === 'Pending'
-                        ? 'pink'
-                        : item.status === 'Delivered'
-                        ? 'green'
-                        : 'red'
-                    }`"
-                  >
-                    {{ item.status }}
+                  <td>
+                    <p
+                      class="w-28 h-8 flex justify-center items-center rounded-md"
+                      :class="
+                        item.status === 'In Progress'
+                          ? 'bg-yellow-200 text-yellow-500'
+                          : item.status === 'Pending'
+                          ? 'bg-blue-500 text-blue-800'
+                          : item.status === 'Delivered'
+                          ? 'bg-green-500 text-green-800'
+                          : 'bg-red-500 text-red-800'
+                      "
+                    >
+                      {{ item.status }}
+                    </p>
                   </td>
                 </tr>
               </tbody>
@@ -236,7 +238,7 @@ const goToSettings = () => {
           <div class="flex justify-between p-4 border-b">
             <p class="font-bold">Top Channels</p>
 
-            <div class="flex items-center text-n-blue cursor-pointer">
+            <div class="flex items-center text-blue-500 cursor-pointer">
               <p class="font-bold">See Details</p>
               <span class="ml-2"> <i class="fa fa-chevron-right"></i> </span>
             </div>

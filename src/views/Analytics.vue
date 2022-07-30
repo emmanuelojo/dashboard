@@ -128,7 +128,9 @@ const shuffleData = () => {
         <LineChart
           ref="lineChartRef"
           :chartData="lineChartData"
-          :options="options" class="z-0"
+          :options="options"
+          class="z-0"
+          style="z-index: 10"
         />
       </div>
 
@@ -139,7 +141,9 @@ const shuffleData = () => {
           <DoughnutChart
             ref="doughnutChartRef"
             :chartData="doughnutChartData"
-            :options="options" class="z-0"
+            :options="options"
+            class="z-0"
+            style="z-index: 10"
           />
         </div>
         <div class="md:h-[305px]">
@@ -148,7 +152,9 @@ const shuffleData = () => {
           <PieChart
             ref="pieChartRef"
             :chartData="pieChartData"
-            :options="options" class="z-0"
+            :options="options"
+            class="z-0"
+            style="z-index: 10"
           />
         </div>
       </div>

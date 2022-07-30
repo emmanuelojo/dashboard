@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref, Ref, onMounted} from 'vue'
+import { ref, Ref, onMounted } from "vue";
 import Pagination from "../components/Pagination.vue";
 import { formatCurrency } from "../utils/helpers";
 
-const listContainer = ref() as Ref<HTMLDivElement>
+const listContainer = ref() as Ref<HTMLDivElement>;
 
 onMounted(() => {
   listContainer.value.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start',
-  })
-})
+    behavior: "smooth",
+    block: "start",
+  });
+});
 
 const orders = [
   {
@@ -108,7 +108,8 @@ const orders = [
 
 <template>
   <div
-    class="mt-20 md:mt-10 mb-10 grid gap-4 px-4 lg:px-10 w-screen md:w-full lg:w-auto" ref="listContainer"
+    class="mt-20 md:mt-10 mb-10 grid gap-4 px-4 lg:px-10 w-screen md:w-full lg:w-auto"
+    ref="listContainer"
   >
     <p class="text-2xl font-bold">Orders({{ orders.length }})</p>
 
@@ -138,19 +139,21 @@ const orders = [
             <td class="px-6 py-4">
               {{ item.hasPaid }}
             </td>
-            <td
-              class="px-6 py-4"
-              :style="`color:  ${
-                item.status === 'In Progress'
-                  ? 'yellow'
-                  : item.status === 'Pending'
-                  ? 'pink'
-                  : item.status === 'Delivered'
-                  ? 'green'
-                  : 'red'
-              }`"
-            >
-              {{ item.status }}
+            <td>
+              <p
+                class="w-28 h-8 flex justify-center items-center rounded-md"
+                :class="
+                  item.status === 'In Progress'
+                    ? 'bg-yellow-200 text-yellow-500'
+                    : item.status === 'Pending'
+                    ? 'bg-blue-500 text-blue-800'
+                    : item.status === 'Delivered'
+                    ? 'bg-green-500 text-green-800'
+                    : 'bg-red-500 text-red-800'
+                "
+              >
+                {{ item.status }}
+              </p>
             </td>
           </tr>
         </tbody>
